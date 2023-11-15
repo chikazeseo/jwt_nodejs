@@ -1,15 +1,24 @@
 require('dotenv').config()
 import express from 'express';
+import bodyParser from 'body-parser';
 import viewEngine from './configs/viewEngine';
 import initWebRoutes from './routes/web';
+import connectDB from './configs/connectDB';
 
 const app = express();
+// Body parser
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: true }))
+// parse application/json
+app.use(bodyParser.json())
+
 // config view engine
 viewEngine(app);
 // init route web
 initWebRoutes(app);
-
-//
+// Connect DB
+connectDB();
+//Listen
 const HOST_NAME = process.env.HOST_NAME;
 const PORT = process.env.PORT;
 

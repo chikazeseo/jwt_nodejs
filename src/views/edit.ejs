@@ -4,7 +4,7 @@
   <div class="row justify-content-center">
     <div class="col-6">
       <h1 class="text-center">Register</h1>
-      <form action="/user/create" method="post">
+      <form action="/user/update" method="post">
         <div class="mb-3">
           <label for="email" class="form-label">Email address</label>
           <input
@@ -13,7 +13,9 @@
             class="form-control"
             id="email"
             aria-describedby="emailHelp"
+            value="<%= user.email %>"
           />
+          <input type="hidden" name="id" value="<%= user.id %>">
           <div id="emailHelp" class="form-text">
             We'll never share your email with anyone else.
           </div>
@@ -26,6 +28,7 @@
             class="form-control"
             id="username"
             aria-describedby="username"
+            value="<%= user.username %>"
           />
           <div id="username" class="form-text">
             We'll never share your email with anyone else.
@@ -44,37 +47,6 @@
       </form>
     </div>
   </div>
-</div>
-<div class="container">
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Username</th>
-        <th scope="col">Email</th>
-        <th scope="col">Edit</th>
-        <th scope="col">Delete</th>
-      </tr>
-    </thead>
-    <tbody>
-        <% arrUsers.forEach( (item, index) => { %>
-            <tr>
-                <th scope="row"><%= index %></th>
-                <td><%= item.username %></td>
-                <td><%= item.email %></td>
-                <td>
-                  <a href="/user/edit/<%= item.id %>" class="btn btn-primary">Edit</a>
-                </td>
-                <td>
-                    <form action="/user/delete" method="post">
-                      <input type="hidden" name="id" value="<%= item.id %>">
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                    </form>
-                </td>
-              </tr>
-        <% }) %>
-    </tbody>
-  </table>
 </div>
 <!-- End main -->
 <%- include('block/footer.ejs') %>
