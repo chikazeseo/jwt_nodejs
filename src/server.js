@@ -3,6 +3,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import viewEngine from './configs/viewEngine';
 import initWebRoutes from './routes/web';
+import initApiRoutes from './routes/api';
 import connectDB from './configs/connectDB';
 
 const app = express();
@@ -16,6 +17,8 @@ app.use(bodyParser.json())
 viewEngine(app);
 // init route web
 initWebRoutes(app);
+// init route api
+initApiRoutes(app);
 // Connect DB
 connectDB();
 //Listen
