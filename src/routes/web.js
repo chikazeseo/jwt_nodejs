@@ -1,5 +1,5 @@
-const route = express.Router();
 import express from "express";
+const route = express.Router();
 // get Controller
 import homeController from "../controller/homeController";
 
