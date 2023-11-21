@@ -3,13 +3,13 @@ import userService from '../service/userService';
 
 
 const handleGetHomePage = (req, res) => {
-    res.render('home.ejs');
-}
+  res.render("home.ejs");
+};
 
 const handleGetUserPage = async (req, res) => {
-    let arrUsers = await userService.getAllUser();
-    res.render('user.ejs', { arrUsers });
-}
+  let arrUsers = await userService.getAllUser();
+  res.render("user.ejs", { arrUsers });
+};
 const handleCreateUser = (req, res) => {
     let email = req.body.email;
     let username = req.body.username;

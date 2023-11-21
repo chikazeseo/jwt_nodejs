@@ -41,12 +41,17 @@ const handleRegister = async (req, res) => {
 }
 const handleLogin = async (req, res) => {
     try {
-        let data = await userApiService.userLogin(req.body);
-        res.status(200).json({
-            EM: data.EM,
-            EC: data.EC,
-            DT: (data.DT) ? data.DT : '',
-        })
+      let data = await userApiService.userLogin(req.body);
+      res.cookie("jwt", data.DT.access_token, {
+        httpOnly: true,
+        maxAge: 60 * 60 * 1000,
+      });
+      console.log("Cookies: ", req.cookies);
+      res.status(200).json({
+        EM: data.EM,
+        EC: data.EC,
+        DT: data.DT ? data.DT.access_token : "",
+      });
     } catch (error) {
         res.status(500).json({
             EM: 'Error from server',

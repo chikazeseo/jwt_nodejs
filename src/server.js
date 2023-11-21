@@ -6,8 +6,13 @@ import initWebRoutes from './routes/web';
 import initApiRoutes from './routes/api';
 import connectDB from './configs/connectDB';
 import corsConfig from './configs/corsConfig';
+import cookieParser from "cookie-parser";
 const app = express();
+// CORS config
 corsConfig(app);
+// Cookie parser
+app.use(cookieParser());
+
 // Body parser
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }))
