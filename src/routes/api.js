@@ -5,16 +5,13 @@ import userController from '../controller/userController';
 import { checkIsLogin, checkUserPermission } from "../middleware/JWTAction";
 
 const initApiRoutes = (app) => {
-  route.post("/register", apiController.handleRegister);
-  route.post("/login", apiController.handleLogin);
+    route.all("*", checkIsLogin, checkUserPermission);
+    //
+    route.post("/register", apiController.handleRegister);
+    route.post("/login", apiController.handleLogin);
 
-  // CRUD User
-  route.get(
-    "/user/read",
-    checkIsLogin,
-    checkUserPermission,
-    userController.read
-  );
+    // CRUD User
+    route.get("/user/read", userController.read);
   route.post("/user/create", userController.create);
   route.put("/user/update", userController.update);
   route.delete("/user/delete", userController.remove);
