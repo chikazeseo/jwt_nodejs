@@ -44,30 +44,31 @@ const storeUser = async (username, password, email) => {
 };
 const updateUser = async (idUser, username, password, email) => {
     try {
-        console.log('Check password>>>', password);
-        if (password == null) {
-            await db.User.update(
-                {
-                    username: username,
-                    email: email,
-                },
-                {
-                    where: { id: idUser }
-                })
-        } else {
-            let hashPass = hashPassword(password);
-            await db.User.update(
-                {
-                    username: username,
-                    email: email,
-                    password: hashPass,
-                },
-                {
-                    where: { id: idUser }
-                })
-        }
+      if (password == null) {
+        await db.User.update(
+          {
+            username: username,
+            email: email,
+          },
+          {
+            where: { id: idUser },
+          }
+        );
+      } else {
+        let hashPass = hashPassword(password);
+        await db.User.update(
+          {
+            username: username,
+            email: email,
+            password: hashPass,
+          },
+          {
+            where: { id: idUser },
+          }
+        );
+      }
     } catch (error) {
-        console.error(error);
+      console.error(error);
     }
 }
 const hashPassword = (password) => {
